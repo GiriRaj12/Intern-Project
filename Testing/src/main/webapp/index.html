@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<meta http-equiv="content-type"
+	content="application/xhtml+xml; charset=UTF-8" />
+<title>Organic Store</title>
+<link rel="stylesheet" href="Main.css">
+</head>
+<body onload="checkSession()">
+	<div class="mainHeadder" id="headder" style="display: none">
+		<header>
+			<div class="header clearfix">
+				<div class="company">
+					<a href="index.html"
+						style="font-size: 30px; float: left; text-decoration: none; color: white; margin-top: -7px">Organic
+						Store</a>
+				</div>
+				<ul class="list" style="float: right">
+					<li><p onclick="login()" id="lg">Login</p>
+						<p onclick="register()" id="regP">Register</p></li>
+				</ul>
+			</div>
+		</header>
+	</div>
+	<div class="loginHeadder" id="loginHeadder" style="display: none">
+		<header>
+			<div class="header clearfix">
+				<div class="company">
+					<a href="index.html" style="color: white; margin-top: -7px;">Organic
+						Store</a>
+				</div>
+				<div class="proList">
+					<ul class="prolist">
+						<li><button onclick="previousOrders()">
+								Orders</button></li>
+						<li><button onclick="ajaxLogout()">Logout</button>
+						<li>
+							<!-- Icon -->
+							<div class="iconPack">
+								<div class="icon" id="icon"></div>
+								<button onclick="cart()" style="float: right">Cart</button>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</header>
+	</div>
+	<!-- Login modal. -->
+	<div class="modal" id="myModal">
+		<div class="login">
+			<div class="form">
+				<span class="close" id="close">&times;</span> <input id="email1"
+					type="email" name="username" placeholder="Email ID" /> <input
+					id="password" type="password" name="password"
+					placeholder="Password" />
+				<button onclick="checkLogin()">Login</button>
+				<p class="message">
+					Not registered? <a onclick="swap()"
+						style="cursor: pointer; color: blue">Create an account</a>
+				</p>
+				<p onclick="admin()" id="admin" style="cursor: pointer; color: blue">Admin
+					Login</p>
+				<p>
+					<a href="index.html">Home</a>
+				</p>
+				<p id="msg"></p>
+			</div>
+		</div>
+	</div>
+	<!-- Register modal. -->
+	<div class="modal2" id="myModalreg" style="display: none">
+		<div class="login">
+			<div class="form">
+				<span class="close" id="closereg">&times;</span> <input id="email2"
+					type="email" name="email_id" placeholder="Email Address" /> <input
+					id="pass" type="password" name="password" placeholder="Password" />
+				<input id="name" type="text" name="user_name" placeholder="Name" />
+				<button onclick="checkRegister()">Register</button>
+				<p class="message">
+					Already registered? <a onclick="swap2()"
+						style="cursor: pointer; color: blue">Sign In</a>
+				</p>
+				<a href="index.html">Home</a>
+				<p id="alert"></p>
+			</div>
+		</div>
+	</div>
+	<!-- Admin Login modal. -->
+	<div class="modal3" id="myModalAdmin" style="display: none">
+		<div class="login">
+			<div class="form">
+				<span class="close" id="closeadmin">&times;</span> <input
+					id="email3" type="email" name="email_id" placeholder="Admin Email " />
+				<input id="adminPass" type="password" name="password"
+					placeholder="Password" />
+				<button onclick="checkAdmin()">Admin Login</button>
+				<p id="adminAlert"></p>
+				<p style="color: blue">
+					<a onclick="swap3()">Customer Login</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	<!-- Admin modal. -->
+	<div class="modal4" id="mymodal4" style="display: none">
+		<div class="login">
+			<div class="form">
+				<p style="float: right">Logout</p>
+				<span class="close" id="closeAdProduct">&times;</span>
+				<p style="text-align: center;">ADD Products</p>
+				<input type="text" id="product" placeholder="Product Name"
+					name="product_name"> <input type="text" id="url"
+					placeholder="Product image url" name="product_url"> <input
+					type="text" id="price" placeholder="Price" name="price"> <select
+					name="Quantity" id="quantity">
+					<option value="1">1Kg</option>
+					<option value="3">3Kg</option>
+					<option value="5">5Kg</option>
+					<option value="10">10Kg</option>
+					<option value="15">15Kg</option>
+				</select>
+				<button onclick="AdminCheck()">Add</button>
+				<p id="added"></p>
+			</div>
+		</div>
+	</div>
+	<!-- Product modal. -->
+	<div class="modal5" id="myModal5" style="display: none">
+		<ul id="imageList">
+		</ul>
+	</div>
+	<div class="productShow" id="productShow" style="display: none">
+		<div class="login">
+			<div class="form clearfix">
+				<span class="close" id="closeProducts">&times;</span> <img
+					id="insert"> <input id="orderQuant" type="text"
+					placeholder="Quantity to buy">
+				<button onclick="AddtoCart()">Add to cart</button>
+				<br> <br>
+				<button onclick="checkout()">Checkout</button>
+				<p id="productmsg"></p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Cart modal -->
+	<div class="cart" id="cart" style="display: none">
+		<div class="table_form clearfix">
+			<span class="close" id="closecart">&times;</span> <img id="insert">
+			<a onclick="deleteAll()"
+				style="float: right; font-size: 15px; color: black; cursor: pointer; margin-right: 15px">Delete
+				All</a>
+			<table id="cart_table" class="cart_table">
+				<thead>
+					<tr>
+						<th>S.No</th>
+						<th>Product</th>
+						<th>Quantity</th>
+						<th>Price</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody id="tBody">
+				</tbody>
+			</table>
+			<br>
+			<button onclick="buyNow()">Buy Now</button>
+			<p id="delmsg"></p>
+		</div>
+	</div>
+	<!-- BuyNow Modal -->
+	<div class="buy_product" id="buy_product" style="display: none">
+		<div class="login">
+			<div class="form clearfix">
+				<span class="close" id="closeBuyNow">&times;</span> <img id="insert">
+				<input type="text" id="ownerName" name="Name" placeholder="Name" />
+				<input type="text" id="phoneNumber" name="Phone"
+					placeholder="Phone Number" />
+				<textarea rows="5" cols="35" name="Address" placeholder="Address"
+					id="address"></textarea>
+				<button onclick="final()">Checkout</button>
+				<p id="buyMsg" style="color: red"></p>
+			</div>
+		</div>
+	</div>
+	<!-- Thank you model -->
+	<div class="thankyou" id="thankyou" style="display: none">
+		<div class="thank_you">
+			<div class="thankyou_form clearfix">
+				<span class="close" id="closethankyou">&times;</span> <img
+					id="insert">
+				<p id="thankyou" style="text-align: center;">Thank you shopping
+					with us !</p>
+				<table id="thankyou_table" class="thankyou_table">
+					<thead>
+						<tr>
+							<th>S.No</th>
+							<th>Product</th>
+							<th>Quantity</th>
+							<th>Price</th>
+							<th>Address</th>
+							<th>Expected Delivery Date</th>
+						</tr>
+					</thead>
+				</table>
+				<button onclick="finish()">Close</button>
+			</div>
+		</div>
+	</div>
+	<!-- Orders Modal -->
+	<div class="Orders" id="order" style="display: none">
+		<div class="login">
+			<div class="Order_form clearfix">
+				<span class="close" id="closeOrders" onclick="closeOrders()">&times;</span>
+				<img id="insert">
+				<p style="text-align: center;">Previous Orders</p>
+				<table id="order_table" class="order_table">
+					<thead>
+						<tr>
+							<th>S.No</th>
+							<th>Product</th>
+							<th>Quantity</th>
+							<th>Ordered Date</th>
+						</tr>
+					</thead>
+				</table>
+				<button onclick="closeOrders()">Close</button>
+			</div>
+		</div>
+	</div>
+	<!-- Body modal. -->
+	<footer>
+		<p style="float: left; color: #ffff; font-size: 20px">
+			<a href="mailto:girirajsekar50@gmail.com"> Contact : Mail Here</a>
+		</p>
+		<p
+			style="float: right; color: #ffff; font-size: 20px; margin-right: 20px">
+			<a href="index.html">Organic Store</a>
+		</p>
+	</footer>
+	<!-- Script -->
+	<script src="script.js"></script>
+</body>
+</html>

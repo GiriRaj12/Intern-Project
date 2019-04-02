@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+      metadata-complete="false" version="3.1">   
+  <servlet>
+    <servlet-name>Register</servlet-name>
+    <servlet-class>com.giri.Register</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Register</servlet-name>
+    <url-pattern>/register</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>Check</servlet-name>
+    <servlet-class>com.giri.Check</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Check</servlet-name>
+    <url-pattern>/Check</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>com.giri.Logout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AddKart</servlet-name>
+    <servlet-class>com.giri.Add</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddKart</servlet-name>
+    <url-pattern>/addkart</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Email</servlet-name>
+    <servlet-class>com.giri.Email</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Email</servlet-name>
+    <url-pattern>/email</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  <servlet-name>ScheduleEmail</servlet-name>
+  <servlet-class>com.giri.Schedule_Email</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>ScheduleEmail</servlet-name>
+  <url-pattern>/Schedule</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  <servlet-name>AdminServlet</servlet-name>
+  <servlet-class>com.giri.Admin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>AdminServlet</servlet-name>
+  <url-pattern>/adminStore</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  <servlet-name>Load</servlet-name>
+  <servlet-class>com.giri.Load</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>Load</servlet-name>
+  <url-pattern>/load</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  <servlet-name>Ses</servlet-name>
+  <servlet-class>com.giri.SendSession</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>Ses</servlet-name>
+  <url-pattern>/session</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  <servlet-name>Cart</servlet-name>
+  <servlet-class>com.giri.Kart</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>Cart</servlet-name>
+  <url-pattern>/kart</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  <servlet-name>Delete</servlet-name>
+  <servlet-class>com.giri.Del</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>Delete</servlet-name>
+  <url-pattern>/delete</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Edit</servlet-name>
+    <servlet-class>com.giri.RowEdit</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Edit</servlet-name>
+    <url-pattern>/edit</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+</web-app>

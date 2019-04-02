@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Admin</title>
+<style>
+.header {
+	font-family: sans-serif;;
+	background-color: MediumSeaGreen;
+	box-shadow: 0 0 18px #6699ff;
+	opacity: 0.8;
+	padding: 5px;
+}
+
+.Company {
+	float: left;
+	text-decoration: none;
+	font-size: 30px;
+	margin-left: 20px;
+	margin-top: 10px;
+}
+
+.list {
+	float: right;
+}
+
+.list a, .Company a {
+	text-decoration: none;
+	color: white;
+	margin-right: 10px;
+}
+
+li {
+	display: inline-block;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.clearfix::after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+.main {
+	width: 360px;
+	padding: 8% 0 0;
+	margin: auto;
+}
+
+.form {
+	position: realtive;
+	z-index: 1;
+	background: #FFFFFF;
+	max-width: 480px;
+	margin: 0 auto 100px;
+	padding: 45px;
+	text-align: center;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0
+		rgba(0, 0, 0, 0.24);
+}
+
+.form input {
+	font-family: "Roboto", sans-serif;
+	outline: 0;
+	background: #f2f2f2;
+	width: 100%;
+	border: 0;
+	margin: 0 0 15px;
+	padding: 15px;
+	box-sizing: border-box;
+	font-size: 14px;
+}
+
+.form button {
+	font-family: "Roboto", sans-serif;
+	text-transform: uppercase;
+	outline: 0;
+	background: #4CAF50;
+	width: 100%;
+	border :1px solid trasparent;
+	padding: 15px;
+	color: #FFFFFF;
+	font-size: 14px;
+	-webkit-transition: all 0.3 ease;
+	transition: all 0.3 ease;
+	cursor: pointer;
+}
+#added{
+color:red;
+}
+select {
+	width: 200px;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+</style>
+</head>
+<header>
+	<div class="header clearfix">
+		<div class="Company">
+			<a href="index.html">Organic Store</a>
+		</div>
+		<ul class="list">
+			<li><a>Welcome Admin</a></li>
+			<li><p onclick="logout()" style="cursor:pointer;">Logout</p>
+		</ul>
+	</div>
+</header>
+
+<body onload="adminSes()">
+	<div class="Admin">
+		<div class="form">
+				<p style="text-align: center;">ADD Products</p>
+				<input type="text" id="product" placeholder="Product Name" name="product_name">
+				<input type="text" id="url" placeholder="Product image url"
+					name="product_url"> 
+					<select name="Quantity" id="quantity">
+					<option value="1">1Kg</option>
+					<option value="3">3Kg</option>
+					<option value="5">5Kg</option>
+					<option value="10">10Kg</option>
+					<option value="15">15Kg</option>
+				</select>
+				<button onclick="Check()">Add</button>
+				<p id="added"></p>
+		</div>
+	</div>
+	<script type="text/javascript">
+	//admin ------------------------------------------------->
+	    // Check null ---------------------------------------->
+		function Check() {
+			var product_name = document.getElementById("product").value;
+			var url = document.getElementById("url").value;
+			var msg = document.getElementById("added");
+			var e = document.getElementById("quantity");
+			var value = e.options[e.selectedIndex].value;
+			msg.innerHTML = "";
+			if (product_name == "") {
+				document.getElementById("product").style.border="1px solid red"
+				msg.innerHTML = "Product Name not given";
+			}
+			else if (url == "") {
+				document.getElementById("url").style.border="1px solid red"
+				msg.innerHTML =  "Url cannot be blanck";
+			}
+			else{
+				ajax_admin(product_name,url,value);
+			}
+			
+		}
+		// Event ----------------------------------------->
+		var b = document.getElementById("product");
+		var c = document.getElementById("url");
+		function event() {
+			document.getElementById("added").innerHTML = "";
+			document.getElementById("product").style.border="1px solid transparent";
+			document.getElementById("url").style.border="1px solid transparent";
+		}
+		b.addEventListener('click', event);
+		c.addEventListener('click', event);
+		// Ajax function ------------------------------->
+		function ajax_admin(x,y,z){
+			var xml = new XMLHttpRequest();
+			xml.onreadystatechange = function() {
+			      if (xml.readyState == 4 && xml.status == 200) {
+			    	  document.getElementById("added").innerHTML=xml.responseText;
+			    	  
+			      }
+			    };
+			    xml.open("GET", "/adminStore?name="+x+"&url="+y+"&quant="+z, true);
+			    xml.send();
+		}
+		function logout(){
+			sessionStorage.setItem("admin",null);
+			window.location.replace("/index.html");
+		}
+		function adminSes(){
+		var x=sessionStorage.getItem("admin");
+		  if(x.length<=4){
+			  console.log("adminses");
+			  window.location.replace("index.html");
+		  }
+		}
+	</script>
+</body>
+</html>
